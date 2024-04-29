@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Mob : Node2D
+public partial class Mob : RigidBody2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -19,12 +19,5 @@ public partial class Mob : Node2D
 	private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
 		QueueFree();
-	}
-	
+	}	
 }
-
-
-//private void _on_visible_on_screen_enabler_2d_screen_exited()
-//{
-	// Replace with function body.
-//}
