@@ -7,6 +7,7 @@ public partial class Main : Node
 	public PackedScene MobScene { get; set; }
 
 	private int _score;
+	//private Node2D buleetManager;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -26,7 +27,9 @@ public partial class Main : Node
 
 		var player = GetNode<Player>("Player");
 		var startPosition = GetNode<Marker2D>("StartPosition");
+		var bulletManager = GetNode<BulletManager>("BulletManager");
 		player.Start(startPosition.Position);
+		//player.Connect("PlayerFiredBow", nameof(BulletManager.HandleBulletSpawned), bulletManager);
 
 		GetNode<Timer>("StartTimer").Start();
 		

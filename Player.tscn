@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://g0aiupmal5wg"]
+[gd_scene load_steps=9 format=3 uid="uid://1ymnfnex7o7l"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_j7oe2"]
 [ext_resource type="Texture2D" uid="uid://cvj1kwhx0nlb6" path="res://art/playerGrey_up1.png" id="2_1o4yk"]
+[ext_resource type="PackedScene" uid="uid://flvw0tnfnnl5" path="res://Bullet.tscn" id="2_p7gtc"]
 [ext_resource type="Texture2D" uid="uid://wn3thfs2hohc" path="res://art/playerGrey_up2.png" id="3_lvogo"]
 [ext_resource type="Texture2D" uid="uid://bk43tapexd634" path="res://art/playerGrey_walk1.png" id="4_rkr0b"]
 [ext_resource type="Texture2D" uid="uid://ckutf3oyg8h47" path="res://art/playerGrey_walk2.png" id="5_t7npv"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_nqepj"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_vbuya"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -31,24 +32,24 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_damfr"]
-radius = 28.0
-height = 72.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngn4r"]
+radius = 32.0
+height = 80.0
 
 [node name="Player" type="Area2D"]
-position = Vector2(0, -1)
 script = ExtResource("1_j7oe2")
+BulletScene = ExtResource("2_p7gtc")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, 0)
 scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_nqepj")
+sprite_frames = SubResource("SpriteFrames_vbuya")
 animation = &"walk"
-frame = 1
-frame_progress = 0.00970814
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_damfr")
+shape = SubResource("CapsuleShape2D_ngn4r")
+
+[node name="EndOfBow" type="Marker2D" parent="."]
+position = Vector2(48, 0)
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://flvw0tnfnnl5"]
+
+[ext_resource type="Script" path="res://Bullet.cs" id="1_b7g4b"]
+[ext_resource type="Texture2D" uid="uid://dwga1murdl8wl" path="res://Sprites/Warcraft_III_Spritesheet.png" id="1_vwlue"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udah8"]
+atlas = ExtResource("1_vwlue")
+region = Rect2(1600, 353, 59, 59)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7q5x2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udah8")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avrt1"]
+size = Vector2(40, 37.7778)
+
+[node name="Bullet" type="Area2D"]
+position = Vector2(-24, -24)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_b7g4b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_7q5x2")
+animation = &"shoot"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8.34465e-07, 0.111112)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_avrt1")
