@@ -66,4 +66,5 @@ shape = SubResource("CapsuleShape2D_2i4r5")
 position = Vector2(1.5, 1.5)
 scale = Vector2(4.25, 5.55)
 
+[connection signal="body_entered" from="." to="." method="OnArea2DBodyEntered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited" flags=6]

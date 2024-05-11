@@ -12,10 +12,13 @@ public partial class Bullet : Area2D
 
 	//private int team = -1;
 
+	[Signal]
+	public delegate void HitEventHandler();
+
 	public override void _Ready()
 	{
-		//killTimer = GetNode<Timer>("KillTimer");
-		//killTimer.Start();
+		killTimer = GetNode<Timer>("KillTimer");
+		killTimer.Start();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -36,10 +39,20 @@ public partial class Bullet : Area2D
 		this.direction = direction;
 	}
 
-	/*private void OnKillTimerTimeout()
+	private void OnBodyEntered(Node2D body)
+	{
+		Hide();
+		//EmitSignal(SignalName.Hit);
+		body.QueueFree();
+
+		// Must be deferred as we can't change physics properties on a physics callback.
+		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);	
+	}
+
+	private void OnKillTimerTimeout()
 	{
 		QueueFree();
-	}*/
+	}
 
 	/*private void OnBulletBodyEntered(Node body)
 	{

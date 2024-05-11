@@ -35,3 +35,8 @@ animation = &"shoot"
 position = Vector2(8.34465e-07, 0.111112)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_avrt1")
+
+[node name="KillTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="timeout" from="KillTimer" to="." method="OnKillTimerTimeout"]
