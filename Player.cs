@@ -133,15 +133,9 @@ public partial class Player : Area2D
 	
 	private void Shoot()
 	{
-		
 		Bullet bulletInstance = BulletScene.Instantiate<Bullet>();
-		GD.Print("shoot!");
-		//bulletInstance.GlobalPosition = EndOfBow.GlobalPosition;
 		var target = GetGlobalMousePosition();
-		//Vector2 directionToMouse = (target - bulletInstance.GlobalPosition).Normalized();
 		Vector2 directionToMouse = EndOfBow.GlobalPosition.DirectionTo(target).Normalized();
-
-		//bulletInstance.SetDirection(directionToMouse.Normalized());
 		EmitSignal(SignalName.PlayerFiredBow, bulletInstance, EndOfBow.GlobalPosition, directionToMouse);
 	}
 	

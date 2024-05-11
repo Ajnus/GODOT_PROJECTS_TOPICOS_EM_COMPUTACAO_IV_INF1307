@@ -7,7 +7,6 @@ public partial class Main : Node
 	public PackedScene MobScene { get; set; }
 
 	private int _score;
-	//private Node2D buleetManager;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -29,9 +28,9 @@ public partial class Main : Node
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		var bulletManager = GetNode<BulletManager>("BulletManager");
 		player.Start(startPosition.Position);
-		//player.Connect("PlayerFiredBow", nameof(BulletManager.HandleBulletSpawned), bulletManager);
 
 		GetNode<Timer>("StartTimer").Start();
+		GetNode<AudioStreamPlayer>("Music").Play();
 		
 		var hud = GetNode<HUD>("HUD");
 		hud.UpdateScore(_score);
@@ -40,8 +39,6 @@ public partial class Main : Node
 		// Note that for calling Godot-provided methods with strings,
 		// we have to use the original Godot snake_case name.
 		GetTree().CallGroup("Mobs", Node.MethodName.QueueFree);
-		
-		GetNode<AudioStreamPlayer>("Music").Play();
 	}
 	
 	private void GameOver()
@@ -93,7 +90,19 @@ public partial class Main : Node
 
 	private void OnScoreTimerTimeout()
 	{
+		_score++;;
+		GetNode<HUD>("HUD").UpdateScore(_score);
+	}
+	
+	private void UpScore()
+	{
+		GD.Print("UPSCORE");
 		_score++;
 		GetNode<HUD>("HUD").UpdateScore(_score);
+	}
+	
+	private void Shot(Area2D bullet, Vector2 position, Vector2 direction)
+	{
+		GetNode<AudioStreamPlayer>("Shot").Play();
 	}
 }
