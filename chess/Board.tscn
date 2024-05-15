@@ -17,3 +17,5 @@ script = ExtResource("2_urvtw")
 
 [node name="BoardSceneSwitcher" type="Node" parent="."]
 script = ExtResource("3_85nwb")
+
+[connection signal="send_location" from="Flow" to="." method="_on_flow_send_location"]
