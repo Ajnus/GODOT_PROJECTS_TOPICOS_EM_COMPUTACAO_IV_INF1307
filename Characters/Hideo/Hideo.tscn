@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://dk3ev8ug4qnap"]
+
+[ext_resource type="Script" path="res://Characters/Mel/StateMachineMel.cs" id="1_822kq"]
+[ext_resource type="Script" path="res://Characters/Hideo/Hideo.cs" id="1_dgln0"]
+[ext_resource type="Texture2D" uid="uid://bauhhhvm5rywd" path="res://Characters/Hideo/Sprites/hideo_idle_spritesheet.png" id="2_vbvr7"]
+[ext_resource type="Script" path="res://FightSceneSwitcher.cs" id="6_p5lw0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg60g"]
+atlas = ExtResource("2_vbvr7")
+region = Rect2(0, 0, 78, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ed0tj"]
+atlas = ExtResource("2_vbvr7")
+region = Rect2(0, 356, 78, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eosln"]
+atlas = ExtResource("2_vbvr7")
+region = Rect2(78, 356, 78, 89)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dlkir"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pg60g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ed0tj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eosln")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsyio"]
+size = Vector2(4.0773, 1.40567)
+
+[node name="Hideo" type="CharacterBody2D"]
+script = ExtResource("1_dgln0")
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource("1_822kq")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -96)
+scale = Vector2(2.26973, 2.34353)
+sprite_frames = SubResource("SpriteFrames_dlkir")
+animation = &"idle"
+frame_progress = 0.854735
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+position = Vector2(-136, 192)
+scale = Vector2(39.4869, 142.281)
+shape = SubResource("RectangleShape2D_xsyio")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="GroundL" type="RayCast2D" parent="Raycasts"]
+
+[node name="GroundR" type="RayCast2D" parent="Raycasts"]
+
+[node name="Ledge_Grab_F" type="RayCast2D" parent="Raycasts"]
+
+[node name="Ledge_Grab_B" type="RayCast2D" parent="Raycasts"]
+
+[node name="Frames" type="Label" parent="."]
+offset_left = -64.0
+offset_top = -152.0
+offset_right = 64.0
+offset_bottom = -129.0
+text = "
+"
+horizontal_alignment = 1
+
+[node name="State" type="Label" parent="."]
+offset_left = -64.0
+offset_top = -128.0
+offset_right = 64.0
+offset_bottom = -105.0
+text = "
+"
+horizontal_alignment = 1
+
+[node name="FightSceneSwitcher" type="Node" parent="."]
+script = ExtResource("6_p5lw0")

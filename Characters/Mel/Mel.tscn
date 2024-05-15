@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Characters/Mel/StateMachineMel.cs" id="2_d24jq"]
 [ext_resource type="Script" path="res://FightSceneSwitcher.cs" id="7_urvou"]
 [ext_resource type="Texture2D" uid="uid://cw14ilc3xd8he" path="res://Characters/Mel/Sprites/mel_kick_spritesheet.png" id="12_esbhb"]
-[ext_resource type="Texture2D" uid="uid://j5lyc0be2i0e" path="res://Characters/Mel/Sprites/walk_spritesheet.png" id="12_pc0v0"]
+[ext_resource type="Texture2D" uid="uid://ds7pj6k174ymw" path="res://Characters/Mel/Sprites/mel_walk_spritesheet.png" id="12_pc0v0"]
 [ext_resource type="Texture2D" uid="uid://cix5my27lbl8d" path="res://Characters/Mel/Sprites/mel_uppercut_spritesheet.png" id="13_a0l4r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_58r7i"]

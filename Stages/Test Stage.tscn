@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccmw7cc5t3vdx"]
+[gd_scene load_steps=5 format=3 uid="uid://ccmw7cc5t3vdx"]
 
 [ext_resource type="Texture2D" uid="uid://70rxfrhr0dhm" path="res://Stages/Smashville/1.png" id="1_jfbxi"]
 [ext_resource type="PackedScene" uid="uid://cll6kf1mvnmvs" path="res://Characters/Mel/Mel.tscn" id="2_mtb1n"]
+[ext_resource type="PackedScene" uid="uid://dk3ev8ug4qnap" path="res://Characters/Hideo/Hideo.tscn" id="3_28u7k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hknmw"]
 size = Vector2(965, 38)
@@ -61,4 +62,7 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="MEL" parent="." instance=ExtResource("2_mtb1n")]
-position = Vector2(0, 195)
+position = Vector2(-262, 209)
+
+[node name="Hideo" parent="." instance=ExtResource("3_28u7k")]
+position = Vector2(236, 215)
