@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg6wmcm7mady7"]
+
+[ext_resource type="Script" path="res://chess/Game.gd" id="1_kkmol"]
+[ext_resource type="Script" path="res://chess/Generator.gd" id="2_urvtw"]
+[ext_resource type="Script" path="res://chess/BoardSceneSwitcher.cs" id="3_85nwb"]
+
+[node name="Board" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_kkmol")
+
+[node name="Flow" type="FlowContainer" parent="."]
+layout_mode = 0
+script = ExtResource("2_urvtw")
+
+[node name="BoardSceneSwitcher" type="Node" parent="."]
+script = ExtResource("3_85nwb")

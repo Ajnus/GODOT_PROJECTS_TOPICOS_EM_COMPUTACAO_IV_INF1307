@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccmw7cc5t3vdx"]
+
+[ext_resource type="Texture2D" uid="uid://70rxfrhr0dhm" path="res://Stages/Smashville/1.png" id="1_jfbxi"]
+[ext_resource type="PackedScene" uid="uid://cll6kf1mvnmvs" path="res://Characters/Mel/Mel.tscn" id="2_mtb1n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hknmw"]
+size = Vector2(965, 38)
+
+[node name="Test Stage" type="Node2D"]
+position = Vector2(72, -48)
+
+[node name="1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(912, 573)
+scale = Vector2(2, 2)
+texture = ExtResource("1_jfbxi")
+
+[node name="2" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_jfbxi")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0.5, 229)
+shape = SubResource("RectangleShape2D_hknmw")
+
+[node name="Label" type="Label" parent="Floor"]
+offset_left = 892.0
+offset_top = 790.0
+offset_right = 932.0
+offset_bottom = 813.0
+text = "floor
+"
+
+[node name="Wall" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall"]
+position = Vector2(-914.6, -575.5)
+polygon = PackedVector2Array(914.6, 920.5, 1253.6, 918.5, 1340.6, 880.5, 1400.6, 823.5, 428, 824, 490.6, 881.5, 574.6, 920.5)
+
+[node name="Label" type="Label" parent="Wall"]
+offset_left = 894.0
+offset_top = 853.0
+offset_right = 934.0
+offset_bottom = 876.0
+text = "wall"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -1140
+limit_top = -710
+limit_right = 1150
+limit_bottom = 550
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.0
+drag_right_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="MEL" parent="." instance=ExtResource("2_mtb1n")]
+position = Vector2(0, 195)

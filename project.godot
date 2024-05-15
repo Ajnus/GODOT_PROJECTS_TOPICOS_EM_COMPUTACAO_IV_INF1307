@@ -1,0 +1,99 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Fighting Game"
+run/main_scene="res://Stages/Test Stage.tscn"
+config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+
+[dotnet]
+
+project/assembly_name="Fighting Game"
+
+[input]
+
+right_1={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"echo":false,"script":null)
+]
+}
+r_right_1={
+"deadzone": 0.5,
+"events": []
+}
+left_1={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"echo":false,"script":null)
+]
+}
+r_left_1={
+"deadzone": 0.5,
+"events": []
+}
+up_1={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":81,"key_label":0,"unicode":113,"echo":false,"script":null)
+]
+}
+r_up_1={
+"deadzone": 0.5,
+"events": []
+}
+down_1={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"echo":false,"script":null)
+]
+}
+r_down_1={
+"deadzone": 0.5,
+"events": []
+}
+shield_1={
+"deadzone": 0.5,
+"events": []
+}
+jump_1={
+"deadzone": 0.5,
+"events": []
+}
+attack_1={
+"deadzone": 0.5,
+"events": []
+}
+special_1={
+"deadzone": 0.5,
+"events": []
+}
+change_scene={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":78,"key_label":0,"unicode":110,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Walls"
+2d_physics/layer_3="Platforms"
+2d_physics/layer_4="Ledges"
+2d_physics/layer_5="Blastzones"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
