@@ -1,7 +1,5 @@
 extends FlowContainer
 
-var scene_switcher: Node
-
 @export var Board_X_Size = 8
 @export var Board_Y_Size = 8
 
@@ -11,8 +9,6 @@ var scene_switcher: Node
 signal send_location
 
 func _ready():
-
-	scene_switcher = $/root/chess/BoardSceneSwitcher
 
 	# stop negative numbers from happening
 	if Board_X_Size < 0 || Board_Y_Size < 0:
@@ -34,14 +30,6 @@ func _ready():
 		Number_Y += 1
 		Number_X = 0
 	Regular_Game()
-
-func switch_to_next_scene() -> void:
-	var next_scene_path: String = "res://Stages/Test Stage.tscn"
-	scene_switcher.SwitchScene(next_scene_path);
-	
-func _process(float)->void:
-	if Input.is_action_pressed("change_scene"):
-		switch_to_next_scene()
 
 func Regular_Game():
 	get_node("0-0").add_child(Summon("Rook", 1))

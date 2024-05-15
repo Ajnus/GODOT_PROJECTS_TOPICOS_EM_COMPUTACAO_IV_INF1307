@@ -1,5 +1,11 @@
 extends Control
 
+#var scene_switcher: Board
+#var scene_switcher := BoardSceneSwitcher.new()
+#var scene_switcher := null
+#onready var scene_switcher = null
+
+
 var Selected_Node = ""
 var Turn = 0
 
@@ -10,6 +16,15 @@ var pos = Vector2(25, 25)
 var Areas: PackedStringArray
 # this is seperate the Areas for special circumstances, like castling.
 var Special_Area: PackedStringArray
+
+func switch_to_next_scene() -> void:
+	var next_scene_path: String = "res://Stages/Test Stage.tscn"
+	get_tree().change_scene_to_file(next_scene_path);
+	
+func _process(float)->void:
+	if Input.is_action_pressed("change_scene"):
+		switch_to_next_scene()
+
 
 func _on_flow_send_location(location: String):
 	# variables for later
