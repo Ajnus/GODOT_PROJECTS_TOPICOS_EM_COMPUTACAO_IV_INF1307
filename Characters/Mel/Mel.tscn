@@ -361,7 +361,7 @@ sprite_frames = SubResource("SpriteFrames_qtpjy")
 animation = &"uppercut"
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
-position = Vector2(-136, 192)
+position = Vector2(11, -68)
 scale = Vector2(39.4869, 142.281)
 shape = SubResource("RectangleShape2D_mb5fa")
 

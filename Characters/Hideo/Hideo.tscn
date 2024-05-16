@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk3ev8ug4qnap"]
+[gd_scene load_steps=12 format=3 uid="uid://dk3ev8ug4qnap"]
 
 [ext_resource type="Script" path="res://Characters/Mel/StateMachineMel.cs" id="1_822kq"]
 [ext_resource type="Script" path="res://Characters/Hideo/Hideo.cs" id="1_dgln0"]
 [ext_resource type="Texture2D" uid="uid://bauhhhvm5rywd" path="res://Characters/Hideo/Sprites/hideo_idle_spritesheet.png" id="2_vbvr7"]
+[ext_resource type="Texture2D" uid="uid://cnc5weoemkqoa" path="res://Characters/Hideo/Sprites/hideo_walk.png" id="4_t8sdb"]
 [ext_resource type="Script" path="res://FightSceneSwitcher.cs" id="6_p5lw0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pg60g"]
@@ -16,6 +17,10 @@ region = Rect2(0, 356, 78, 89)
 [sub_resource type="AtlasTexture" id="AtlasTexture_eosln"]
 atlas = ExtResource("2_vbvr7")
 region = Rect2(78, 356, 78, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_686ww"]
+atlas = ExtResource("4_t8sdb")
+region = Rect2(0, 0, 78, 76)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dlkir"]
 animations = [{
@@ -32,6 +37,14 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_686ww")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsyio"]
@@ -47,11 +60,10 @@ script = ExtResource("1_822kq")
 position = Vector2(0, -96)
 scale = Vector2(2.26973, 2.34353)
 sprite_frames = SubResource("SpriteFrames_dlkir")
-animation = &"idle"
-frame_progress = 0.854735
+animation = &"walk"
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
-position = Vector2(-136, 192)
+position = Vector2(7, -100)
 scale = Vector2(39.4869, 142.281)
 shape = SubResource("RectangleShape2D_xsyio")
 
