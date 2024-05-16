@@ -159,16 +159,15 @@ public partial class Hideo : CharacterBody2D
 		//if (Input.IsActionPressed("move_up"))
 		//	velocity.Y -= 1;
 
-		/*
-		if (Input.IsActionPressed("up_1") && !animatedSprite2D.Animation.Equals("uppercut"))
-			animatedSprite2D.Play("uppercut");
+	
+		//if (Input.IsActionPressed("up_1") && !animatedSprite2D.Animation.Equals("uppercut"))
+		//	animatedSprite2D.Play("uppercut");
 
-		if (Input.IsActionPressed("down_1") && !animatedSprite2D.Animation.Equals("kick"))
+		if (Input.IsActionPressed("down_2") && !animatedSprite2D.Animation.Equals("kick"))
 			animatedSprite2D.Play("kick");
 
-		if (Input.IsActionPressed("change_scene"))
-			SwitchToNextScene();
-		*/
+		//if (Input.IsActionPressed("change_scene"))
+		//	SwitchToNextScene();
 
 	/*	var sprite_frames = $AnimatedSprite2D.sprite_frames
 			Get the first texture of the wanted animation (in this case, walk, you can also get the size
