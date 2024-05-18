@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://dk3ev8ug4qnap"]
+[gd_scene load_steps=30 format=3 uid="uid://dk3ev8ug4qnap"]
 
 [ext_resource type="Script" path="res://Characters/Mel/StateMachineMel.cs" id="1_822kq"]
 [ext_resource type="Script" path="res://Characters/Hideo/Hideo.cs" id="1_dgln0"]
 [ext_resource type="Texture2D" uid="uid://bauhhhvm5rywd" path="res://Characters/Hideo/Sprites/hideo_idle_spritesheet.png" id="2_vbvr7"]
 [ext_resource type="Texture2D" uid="uid://celcsocyg8oot" path="res://Characters/Hideo/Sprites/hideo_kick.png" id="4_a5ujp"]
 [ext_resource type="Texture2D" uid="uid://cnc5weoemkqoa" path="res://Characters/Hideo/Sprites/hideo_walk.png" id="4_t8sdb"]
+[ext_resource type="Texture2D" uid="uid://bqimpu7qi4gqt" path="res://Characters/Hideo/Sprites/hideo_uppercut2.png" id="5_g8c6w"]
 [ext_resource type="Script" path="res://FightSceneSwitcher.cs" id="6_p5lw0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pg60g"]
@@ -58,6 +59,30 @@ region = Rect2(156, 76, 78, 76)
 [sub_resource type="AtlasTexture" id="AtlasTexture_nckl0"]
 atlas = ExtResource("4_a5ujp")
 region = Rect2(234, 76, 78, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoclq"]
+atlas = ExtResource("5_g8c6w")
+region = Rect2(0, 0, 65, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh4xh"]
+atlas = ExtResource("5_g8c6w")
+region = Rect2(65, 0, 65, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttoun"]
+atlas = ExtResource("5_g8c6w")
+region = Rect2(130, 0, 65, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80hrb"]
+atlas = ExtResource("5_g8c6w")
+region = Rect2(0, 78, 65, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sisai"]
+atlas = ExtResource("5_g8c6w")
+region = Rect2(65, 78, 65, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drers"]
+atlas = ExtResource("5_g8c6w")
+region = Rect2(130, 78, 65, 78)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_686ww"]
 atlas = ExtResource("4_t8sdb")
@@ -116,6 +141,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_hoclq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh4xh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttoun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80hrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sisai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drers")
+}],
+"loop": true,
+"name": &"uppercut",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_686ww")
 }],
 "loop": true,
@@ -136,9 +184,7 @@ script = ExtResource("1_822kq")
 position = Vector2(0, -88)
 scale = Vector2(2.26973, 2.34353)
 sprite_frames = SubResource("SpriteFrames_dlkir")
-animation = &"kick"
-frame = 9
-frame_progress = 1.0
+animation = &"uppercut"
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2(7, -100)

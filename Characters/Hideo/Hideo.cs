@@ -160,8 +160,8 @@ public partial class Hideo : CharacterBody2D
 		//	velocity.Y -= 1;
 
 	
-		//if (Input.IsActionPressed("up_1") && !animatedSprite2D.Animation.Equals("uppercut"))
-		//	animatedSprite2D.Play("uppercut");
+		if (Input.IsActionPressed("up_2") && !animatedSprite2D.Animation.Equals("uppercut"))
+			animatedSprite2D.Play("uppercut");
 
 		if (Input.IsActionPressed("down_2") && !animatedSprite2D.Animation.Equals("kick"))
 			animatedSprite2D.Play("kick");
