@@ -46,7 +46,7 @@ public partial class TestStage : Node2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (Input.IsActionPressed("change_scene"))
+		if (Input.IsActionJustPressed("change_scene"))
 			{
 				//GD.Print("TESTSTAGE: Change scene action pressed");
 				SwitchToNextScene("res://chess/Board.tscn");

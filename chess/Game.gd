@@ -29,7 +29,7 @@ func _ready()->void:
 	load_board_state()
 	
 func _process(float)->void:
-	if Input.is_action_pressed("change_scene"):
+	if Input.is_action_just_pressed("change_scene"):
 		switch_to_next_scene()
 
 
@@ -332,6 +332,7 @@ func Is_Null(Location):
 func save_board_state() -> void:
 	#var board_data = {}
 	var flow_node = get_node("Flow")
+	board_data["turn"] = Turn
 	
 	for child in flow_node.get_children():
 		if child.get_child_count() > 0:
@@ -355,6 +356,8 @@ func load_board_state():
 		print("Save file found")
 		var file = FileAccess.open(save_path, FileAccess.READ)
 		board_data = file.get_var()
+		file.close()
+		Turn = board_data.get("turn", 0)
 		
 		#print(board_data)
 
@@ -399,3 +402,7 @@ func load_board_state():
 	print("Board: ", board_data);
 
 
+
+
+func OnTimerTimeout():
+	pass

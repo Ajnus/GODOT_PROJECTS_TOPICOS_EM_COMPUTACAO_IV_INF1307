@@ -90,6 +90,7 @@ public partial class Mel : CharacterBody2D
 		{
 			using var file = FileAccess.Open(save_path, FileAccess.ModeFlags.Read);
 			player_data = (Dictionary)file.GetVar();
+			file.Close();
 
 			if (player_data.ContainsKey("global_position"))
 			{
