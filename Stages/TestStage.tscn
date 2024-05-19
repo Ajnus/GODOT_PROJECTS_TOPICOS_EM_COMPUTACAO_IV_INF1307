@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://70rxfrhr0dhm" path="res://Stages/Smashville/1.png" id="2_2hkou"]
 [ext_resource type="PackedScene" uid="uid://cll6kf1mvnmvs" path="res://Characters/Mel/Mel.tscn" id="3_u05yb"]
 [ext_resource type="PackedScene" uid="uid://dk3ev8ug4qnap" path="res://Characters/Hideo/Hideo.tscn" id="4_ary1m"]
-[ext_resource type="Script" path="res://Stages/SceneSwitcher.cs" id="5_kchhi"]
+[ext_resource type="Script" path="res://FightSceneSwitcher.cs" id="5_rid8w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hknmw"]
 size = Vector2(965, 38)
 
-[node name="Test Stage" type="Node2D"]
+[node name="TestStage" type="Node2D"]
 position = Vector2(72, -48)
 script = ExtResource("1_majp2")
 
@@ -67,8 +67,8 @@ editor_draw_drag_margin = true
 [node name="MEL" parent="." instance=ExtResource("3_u05yb")]
 position = Vector2(-262, 209)
 
-[node name="Hideo" parent="." instance=ExtResource("4_ary1m")]
+[node name="HIDEO" parent="." groups=["Persist"] instance=ExtResource("4_ary1m")]
 position = Vector2(236, 215)
 
-[node name="SceneSwitcher" type="Node" parent="."]
-script = ExtResource("5_kchhi")
+[node name="FightSceneSwitcher" type="Node" parent="."]
+script = ExtResource("5_rid8w")

@@ -3,20 +3,53 @@ using System;
 
 public partial class TestStage : Node2D
 {
-	public SceneSwitcher sceneSwitcher;
+	public FightSceneSwitcher sceneSwitcher;
+	public Mel mel;
+	public Hideo hideo;
 
 	public override void _Ready()
 	{
-		sceneSwitcher = GetNode<SceneSwitcher>("SceneSwitcher");
+		// Tente obter o nó FightSceneSwitcher
+		sceneSwitcher = GetNode<FightSceneSwitcher>("FightSceneSwitcher");
+		mel = GetNode<Mel>("MEL");
+		hideo = GetNode<Hideo>("HIDEO");
+		
+		// Verifique se o nó foi encontrado
+		if (sceneSwitcher == null)
+		{
+			GD.Print("TESTSTAGE: FightSceneSwitcher node not found");
+		}
+		else
+		{
+			GD.Print("TESTSTAGE: FightSceneSwitcher node found: " + sceneSwitcher.Name);
+		}
 	}
 
 	public void SwitchToNextScene(string scene_path)
 	{
-		sceneSwitcher.SwitchScene(scene_path);
+		mel.Save();
+		hideo.Save();
+
+		GD.Print("TESTSTAGE: scene_path: " + scene_path);
+		
+		if (sceneSwitcher != null)
+		{
+			GD.Print("TESTSTAGE: sceneSwitcher: " + sceneSwitcher.Name);
+			sceneSwitcher.SwitchScene(scene_path);
+		}
+		else
+		{
+			GD.Print("TESTSTAGE: Cannot switch scene: FightSceneSwitcher is null");
+		}
+	
 	}
 
-	public void _Process(float delta)
+	public override void _PhysicsProcess(double delta)
 	{
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
+		if (Input.IsActionPressed("change_scene"))
+			{
+				GD.Print("TESTSTAGE: Change scene action pressed");
+				SwitchToNextScene("res://chess/Board.tscn");
+			}
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dk3ev8ug4qnap"]
+[gd_scene load_steps=29 format=3 uid="uid://dk3ev8ug4qnap"]
 
 [ext_resource type="Script" path="res://Characters/Mel/StateMachineMel.cs" id="1_822kq"]
 [ext_resource type="Script" path="res://Characters/Hideo/Hideo.cs" id="1_dgln0"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://celcsocyg8oot" path="res://Characters/Hideo/Sprites/hideo_kick.png" id="4_a5ujp"]
 [ext_resource type="Texture2D" uid="uid://cnc5weoemkqoa" path="res://Characters/Hideo/Sprites/hideo_walk.png" id="4_t8sdb"]
 [ext_resource type="Texture2D" uid="uid://bqimpu7qi4gqt" path="res://Characters/Hideo/Sprites/hideo_uppercut2.png" id="5_g8c6w"]
-[ext_resource type="Script" path="res://FightSceneSwitcher.cs" id="6_p5lw0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pg60g"]
 atlas = ExtResource("2_vbvr7")
@@ -218,8 +217,5 @@ offset_bottom = -105.0
 text = "
 "
 horizontal_alignment = 1
-
-[node name="FightSceneSwitcher" type="Node" parent="."]
-script = ExtResource("6_p5lw0")
 
 [connection signal="animation_finished" from="Sprite" to="." method="OnAnimationFinished"]

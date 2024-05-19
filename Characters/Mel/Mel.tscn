@@ -1,9 +1,8 @@
-[gd_scene load_steps=55 format=3 uid="uid://cll6kf1mvnmvs"]
+[gd_scene load_steps=54 format=3 uid="uid://cll6kf1mvnmvs"]
 
 [ext_resource type="Texture2D" uid="uid://t8ng5wv4ave8" path="res://Characters/Mel/Sprites/mel_idle_spritesheet.png" id="1_iiomv"]
 [ext_resource type="Script" path="res://Characters/Mel/Mel.cs" id="1_pf0ew"]
 [ext_resource type="Script" path="res://Characters/Mel/StateMachineMel.cs" id="2_d24jq"]
-[ext_resource type="Script" path="res://FightSceneSwitcher.cs" id="7_urvou"]
 [ext_resource type="Texture2D" uid="uid://cw14ilc3xd8he" path="res://Characters/Mel/Sprites/mel_kick_spritesheet.png" id="12_esbhb"]
 [ext_resource type="Texture2D" uid="uid://ds7pj6k174ymw" path="res://Characters/Mel/Sprites/mel_walk_spritesheet.png" id="12_pc0v0"]
 [ext_resource type="Texture2D" uid="uid://cix5my27lbl8d" path="res://Characters/Mel/Sprites/mel_uppercut_spritesheet.png" id="13_a0l4r"]
@@ -392,8 +391,5 @@ offset_bottom = -105.0
 text = "
 "
 horizontal_alignment = 1
-
-[node name="FightSceneSwitcher" type="Node" parent="."]
-script = ExtResource("7_urvou")
 
 [connection signal="animation_finished" from="Sprite" to="." method="OnAnimationFinished"]

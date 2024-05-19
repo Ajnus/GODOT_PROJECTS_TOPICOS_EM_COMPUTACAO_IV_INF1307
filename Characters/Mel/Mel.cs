@@ -54,28 +54,10 @@ public partial class Mel : CharacterBody2D
 		States = GetNode<Node>("State");
 		ScreenSize = GetViewportRect().Size;
 		GetNode<AnimatedSprite2D>("Sprite").Play("idle");
-		sceneSwitcher = GetNode<FightSceneSwitcher>("FightSceneSwitcher");
+		//sceneSwitcher = GetNode<FightSceneSwitcher>("FightSceneSwitcher");
 		//GetNode<AnimatedSprite2D>("Sprite").Connect("animation_finished", OnAnimationFinished());
-		TestStage parent = GetParent<TestStage>();
+		// Improved sceneSwitcher assignment
 
-		// Verificar se o nó pai foi encontrado e acessar a variável sceneSwitcher
-		if (parent != null)
-		{
-			SceneSwitcher sceneSwitcher = parent.sceneSwitcher;
-			if (sceneSwitcher != null)
-			{
-				GD.Print("sceneSwitcher accessed successfully");
-				// Agora você pode usar a variável sceneSwitcher conforme necessário
-			}
-			else
-			{
-				GD.Print("sceneSwitcher is null");
-			}
-		}
-		else
-		{
-			GD.Print("Parent node not found");
-		}
 
 		Load();
 
@@ -288,8 +270,40 @@ public partial class Mel : CharacterBody2D
 	public void SwitchToNextScene()
 	{
 		Save();
-		sceneSwitcher.SwitchScene("res://chess/Board.tscn");
+
+		if (GetParent() is TestStage parent)
+		{
+
+			GD.Print("MEL: Parent node: ", parent.Name);
+
+			sceneSwitcher = parent.sceneSwitcher;
+			GD.Print("MEL: parent.sceneSwitcher: ", parent.sceneSwitcher);
+			if (sceneSwitcher == null)
+			{
+				GD.Print("MEL: sceneSwitcher is null. Please check if it is properly initialized in the parent node.");
+			}
+			else
+			{
+				GD.Print("MEL: sceneSwitcher accessed successfully");
+			}
+		}
+		else
+		{
+			GD.Print("MEL: Parent node is not of type TestStage or parent node not found.");
+
+			GD.Print("MEL: Parent node not found");
+		}
+
+		if (sceneSwitcher != null)
+		{
+			sceneSwitcher.SwitchScene("res://chess/Board.tscn");
+		}
+		else
+		{
+			GD.Print("MEL: sceneSwitcher is null, cannot switch scene");
+		}
 	}
+
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -384,8 +398,8 @@ public partial class Mel : CharacterBody2D
 		if (Input.IsActionPressed("down_1") && !animatedSprite2D.Animation.Equals("kick"))
 			animatedSprite2D.Play("kick");
 
-		if (Input.IsActionPressed("change_scene"))
-			SwitchToNextScene();
+		//if (Input.IsActionPressed("change_scene"))
+		//	SwitchToNextScene();
 
 		/*	var sprite_frames = $AnimatedSprite2D.sprite_frames
 				Get the first texture of the wanted animation (in this case, walk, you can also get the size
