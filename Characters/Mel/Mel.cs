@@ -112,7 +112,7 @@ public partial class Mel : CharacterBody2D
 		{
 			player_data = new Dictionary();
 		}
-		GD.Print("Mel: ", player_data);
+		//GD.Print("Mel: ", player_data);
 	}
 
 	/*
@@ -294,24 +294,24 @@ public partial class Mel : CharacterBody2D
 		if (GetParent() is TestStage parent)
 		{
 
-			GD.Print("MEL: Parent node: ", parent.Name);
+			//GD.Print("MEL: Parent node: ", parent.Name);
 
 			sceneSwitcher = parent.sceneSwitcher;
-			GD.Print("MEL: parent.sceneSwitcher: ", parent.sceneSwitcher);
+			//GD.Print("MEL: parent.sceneSwitcher: ", parent.sceneSwitcher);
 			if (sceneSwitcher == null)
 			{
-				GD.Print("MEL: sceneSwitcher is null. Please check if it is properly initialized in the parent node.");
+				//GD.Print("MEL: sceneSwitcher is null. Please check if it is properly initialized in the parent node.");
 			}
 			else
 			{
-				GD.Print("MEL: sceneSwitcher accessed successfully");
+				//GD.Print("MEL: sceneSwitcher accessed successfully");
 			}
 		}
 		else
 		{
-			GD.Print("MEL: Parent node is not of type TestStage or parent node not found.");
+			//GD.Print("MEL: Parent node is not of type TestStage or parent node not found.");
 
-			GD.Print("MEL: Parent node not found");
+			//GD.Print("MEL: Parent node not found");
 		}
 
 		if (sceneSwitcher != null)
@@ -320,7 +320,7 @@ public partial class Mel : CharacterBody2D
 		}
 		else
 		{
-			GD.Print("MEL: sceneSwitcher is null, cannot switch scene");
+			//GD.Print("MEL: sceneSwitcher is null, cannot switch scene");
 		}
 	}
 

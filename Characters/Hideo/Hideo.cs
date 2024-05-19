@@ -107,7 +107,7 @@ public partial class Hideo : CharacterBody2D
 		{
 			player_data = new Dictionary();
 		}
-		GD.Print("Hideo:", player_data);
+		//GD.Print("Hideo:", player_data);
 	}
 
 	public void OnAnimationFinished()
@@ -131,24 +131,24 @@ public partial class Hideo : CharacterBody2D
 		if (GetParent() is TestStage parent)
 		{
 
-			GD.Print("HIDEO: Parent node: ", parent.Name);
+			//GD.Print("HIDEO: Parent node: ", parent.Name);
 
 			sceneSwitcher = parent.sceneSwitcher;
-			GD.Print("HIDEO: parent.sceneSwitcher: ", parent.sceneSwitcher);
+			//GD.Print("HIDEO: parent.sceneSwitcher: ", parent.sceneSwitcher);
 			if (sceneSwitcher == null)
 			{
-				GD.Print("HIDEO: sceneSwitcher is null. Please check if it is properly initialized in the parent node.");
+				//GD.Print("HIDEO: sceneSwitcher is null. Please check if it is properly initialized in the parent node.");
 			}
 			else
 			{
-				GD.Print("HIDEO: sceneSwitcher accessed successfully");
+				//GD.Print("HIDEO: sceneSwitcher accessed successfully");
 			}
 		}
 		else
 		{
-			GD.Print("HIDEO: Parent node is not of type TestStage or parent node not found.");
+			//GD.Print("HIDEO: Parent node is not of type TestStage or parent node not found.");
 
-			GD.Print("HIDEO: Parent node not found");
+			//GD.Print("HIDEO: Parent node not found");
 		}
 
 		if (sceneSwitcher != null)
@@ -157,7 +157,7 @@ public partial class Hideo : CharacterBody2D
 		}
 		else
 		{
-			GD.Print("HIDEO: sceneSwitcher is null, cannot switch scene");
+			//GD.Print("HIDEO: sceneSwitcher is null, cannot switch scene");
 		}
 	}
 

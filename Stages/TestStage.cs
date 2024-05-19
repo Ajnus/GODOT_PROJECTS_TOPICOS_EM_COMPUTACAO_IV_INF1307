@@ -17,11 +17,11 @@ public partial class TestStage : Node2D
 		// Verifique se o nó foi encontrado
 		if (sceneSwitcher == null)
 		{
-			GD.Print("TESTSTAGE: FightSceneSwitcher node not found");
+			//GD.Print("TESTSTAGE: FightSceneSwitcher node not found");
 		}
 		else
 		{
-			GD.Print("TESTSTAGE: FightSceneSwitcher node found: " + sceneSwitcher.Name);
+			//GD.Print("TESTSTAGE: FightSceneSwitcher node found: " + sceneSwitcher.Name);
 		}
 	}
 
@@ -30,16 +30,16 @@ public partial class TestStage : Node2D
 		mel.Save();
 		hideo.Save();
 
-		GD.Print("TESTSTAGE: scene_path: " + scene_path);
+		//GD.Print("TESTSTAGE: scene_path: " + scene_path);
 		
 		if (sceneSwitcher != null)
 		{
-			GD.Print("TESTSTAGE: sceneSwitcher: " + sceneSwitcher.Name);
+			//GD.Print("TESTSTAGE: sceneSwitcher: " + sceneSwitcher.Name);
 			sceneSwitcher.SwitchScene(scene_path);
 		}
 		else
 		{
-			GD.Print("TESTSTAGE: Cannot switch scene: FightSceneSwitcher is null");
+			//GD.Print("TESTSTAGE: Cannot switch scene: FightSceneSwitcher is null");
 		}
 	
 	}
@@ -48,7 +48,7 @@ public partial class TestStage : Node2D
 	{
 		if (Input.IsActionPressed("change_scene"))
 			{
-				GD.Print("TESTSTAGE: Change scene action pressed");
+				//GD.Print("TESTSTAGE: Change scene action pressed");
 				SwitchToNextScene("res://chess/Board.tscn");
 			}
 	}

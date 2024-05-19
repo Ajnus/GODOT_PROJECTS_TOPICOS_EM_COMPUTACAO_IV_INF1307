@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 #var scene_switcher: Board
 #var scene_switcher := BoardSceneSwitcher.new()
@@ -17,8 +17,16 @@ var Areas: PackedStringArray
 # this is seperate the Areas for special circumstances, like castling.
 var Special_Area: PackedStringArray
 
+var save_path = "res://BoardStats.sav";
+
+var board_data = {}
+
 func switch_to_next_scene() -> void:
+	save_board_state()
 	get_tree().change_scene_to_file("res://Stages/TestStage.tscn");
+
+func _ready()->void:
+	load_board_state()
 	
 func _process(float)->void:
 	if Input.is_action_pressed("change_scene"):
@@ -320,3 +328,74 @@ func Is_Null(Location):
 		return true
 	else:
 		return false
+
+func save_board_state() -> void:
+	#var board_data = {}
+	var flow_node = get_node("Flow")
+	
+	for child in flow_node.get_children():
+		if child.get_child_count() > 0:
+			var piece = child.get_child(0)
+			var piece_info = {
+				"type": piece.name,
+				"color": piece.Item_Color,
+				"double_start": piece.Double_Start if "Double_Start" in piece else null,
+				"en_passant": piece.En_Passant if "En_Passant" in piece else null,
+				"castling": piece.Castling if "Castling" in piece else null
+			}
+			board_data[child.name] = piece_info
+
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	#var jstr = JSON.stringify(board_data)
+	file.store_var(board_data)
+	file.close()
+
+func load_board_state():
+	if (FileAccess.file_exists(save_path)):
+		print("Save file found")
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		board_data = file.get_var()
+		
+		#print(board_data)
+
+		var flow_node = get_node("Flow")
+		for child in flow_node.get_children():
+			if child.name in board_data:
+				var piece_info = board_data[child.name]
+				var piece = null
+				match piece_info["type"]:
+					"Pawn":
+						piece = Pawn.new()
+					"Bishop":
+						piece = Bishop.new()
+					"King":
+						piece = King.new()
+					"Queen":
+						piece = Queen.new()
+					"Rook":
+						piece = Rook.new()
+					"Knight":
+						piece = Knight.new()
+				if piece != null:
+					piece.Item_Color = piece_info["color"]
+					if piece_info["double_start"] != null:
+						piece.Double_Start = piece_info["double_start"]
+					if piece_info["en_passant"] != null:
+						piece.En_Passant = piece_info["en_passant"]
+					if piece_info["castling"] != null:
+						piece.Castling = piece_info["castling"]
+
+					child.add_child(piece)  # Add the piece to the scene tree first
+					piece.position = pos  # Set the position after adding to the tree
+					
+					#piece.position = pos
+					#piece.reparent(child)
+					#child.add_child(piece)
+					#child.position = pos
+	else:
+		board_data = {}
+		print("No save file found")
+
+	print("Board: ", board_data);
+
+

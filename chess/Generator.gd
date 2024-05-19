@@ -92,3 +92,24 @@ func Summon(Piece_Name: String, color: int):
 	Piece.Item_Color = color
 	Piece.position = Vector2(Tile_X_Size / 2, Tile_Y_Size / 2)
 	return Piece
+
+func save():
+	var save_data = {
+		"Board_X_Size": Board_X_Size,
+		"Board_Y_Size": Board_Y_Size,
+		"Tile_X_Size": Tile_X_Size,
+		"Tile_Y_Size": Tile_Y_Size,
+		"children": []
+	}
+	for child in get_children():
+		var child_data = {}
+		child_data["name"] = child.name
+		child_data["position"] = child.position
+		child_data["Item_Color"] = child.Item_Color
+		save_data["children"].append(child_data)
+		
+	#FileAccess file = FileAccess.Open(save_path, FileAccess.ModeFlags.Write);
+		#file.StoreVar(player_data);
+		#GD.Print("global_position salva!");
+
+		#file.Close();
