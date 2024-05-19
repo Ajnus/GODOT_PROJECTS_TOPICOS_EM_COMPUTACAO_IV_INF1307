@@ -349,7 +349,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mb5fa"]
 size = Vector2(4.0773, 1.40567)
 
-[node name="MEL" type="CharacterBody2D"]
+[node name="MEL" type="CharacterBody2D" groups=["Persist"]]
 script = ExtResource("1_pf0ew")
 
 [node name="StateMachine" type="Node2D" parent="."]

@@ -1,5 +1,7 @@
 using Godot;
+using Godot.Collections;
 using System;
+using System.Collections.Generic;
 
 public partial class Mel : CharacterBody2D
 {
@@ -40,6 +42,10 @@ public partial class Mel : CharacterBody2D
 
 	public FightSceneSwitcher sceneSwitcher;
 
+	public Dictionary player_data = new Dictionary();
+
+	public string save_path = "res://MelStats.sav";
+
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
@@ -50,7 +56,103 @@ public partial class Mel : CharacterBody2D
 		GetNode<AnimatedSprite2D>("Sprite").Play("idle");
 		sceneSwitcher = GetNode<FightSceneSwitcher>("FightSceneSwitcher");
 		//GetNode<AnimatedSprite2D>("Sprite").Connect("animation_finished", OnAnimationFinished());
+
+		Load();
+
 	}
+
+	public void Save()
+	{
+		//GD.Print("global_position: ", GlobalPosition);
+		player_data["global_position"] = GlobalPosition;
+		FileAccess file = FileAccess.Open(save_path, FileAccess.ModeFlags.Write);
+		file.StoreVar(player_data);
+		//GD.Print("global_position salva!");
+		file.Close();
+	}
+
+	public void Load()
+	{
+		if (FileAccess.FileExists(save_path))
+		{
+			using var file = FileAccess.Open(save_path, FileAccess.ModeFlags.Read);
+			player_data = (Dictionary)file.GetVar();
+
+			if (player_data.ContainsKey("global_position"))
+			{	
+				//GD.Print("global_position: ", GlobalPosition);
+				GlobalPosition = (Vector2)player_data["global_position"];
+				//GD.Print("global_position loaded!");
+			}
+		}
+		else
+		{
+			player_data = new Dictionary();
+		}
+		GD.Print(player_data);
+	}
+
+	/*
+	public override void _Notification(int what)
+	{
+		if (what == MainLoop.NotificationWmQuitRequest || what == MainLoop.NotificationWmGoBackRequest)
+		{
+			Save();
+		}
+	}
+	*/
+
+	/*
+	public Dictionary<string, object> SaveNodeData()
+	{
+		return new Dictionary<string, object>()
+		{
+			{ "Parent", GetParent().GetPath() },
+			{ "PosX", GlobalPosition.X },
+			{ "PosY", GlobalPosition.Y },
+		};
+	}
+	*/
+	
+	/*
+	 public void SaveSceneState()
+	{
+		// Exemplo: salvar a posição de um nó chamado "Player"
+		Vector2 playerPosition = GetNode<Mel>("Mel").GlobalPosition;
+		
+		// Salvar os dados em um arquivo
+		Godot.Fil saveFile = new File();
+		saveFile.Open("user://save_data.sav", File.ModeFlags.Write);
+		saveFile.StoreVector2(playerPosition);
+		saveFile.Close();
+	}*/
+
+	/*
+	public Dictionary<string, object> Save()
+	{
+		return new Dictionary<string, object>()
+		{
+			//{ "Filename", GetFilename() },
+			{ "Parent", GetParent().GetPath() },
+			{ "PosX", Position.X }, // Vector2 is not supported by JSON
+			{ "PosY", Position.Y },
+			//{ "Attack", Attack },
+			//{ "Defense", Defense },
+			//{ "CurrentHealth", CurrentHealth },
+			//{ "MaxHealth", MaxHealth },
+			//{ "Damage", Damage },
+			//{ "Regen", Regen },
+			//{ "Experience", Experience },
+			//{ "Tnl", Tnl },
+			//{ "Level", Level },
+			//{ "AttackGrowth", AttackGrowth },
+			//{ "DefenseGrowth", DefenseGrowth },
+			//{ "HealthGrowth", HealthGrowth },
+			//{ "IsAlive", IsAlive },
+			//{ "LastAttack", LastAttack }
+		};
+	}
+	*/
 
 	public void OnAnimationFinished()
 	{
@@ -66,10 +168,106 @@ public partial class Mel : CharacterBody2D
 		}
 	}
 
+	// Note: This can be called from anywhere inside the tree. This function is
+	// path independent.
+	// Go through everything in the persist category and ask them to return a
+	// dict of relevant variables.
+
+	/*
+	public void SaveGame()
+{
+	using var saveGame = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Write);
+
+	var saveNodes = GetTree().GetNodesInGroup("Persist");
+	foreach (Node saveNode in saveNodes)
+	{
+		// Check the node is an instanced scene so it can be instanced again during load.
+		if (string.IsNullOrEmpty(saveNode.SceneFilePath))
+		{
+			GD.Print($"persistent node '{saveNode.Name}' is not an instanced scene, skipped");
+			continue;
+		}
+
+		// Check the node has a save function.
+		if (!saveNode.HasMethod("Save"))
+		{
+			GD.Print($"persistent node '{saveNode.Name}' is missing a Save() function, skipped");
+			continue;
+		}
+
+		// Call the node's save function.
+		var nodeData = saveNode.Call("Save");
+
+		// Json provides a static method to serialized JSON string.
+		var jsonString = Json.Stringify(nodeData);
+
+		// Store the save dictionary as a new line in the save file.
+		saveGame.StoreLine(jsonString);
+	}
+}
+
+	// Note: This can be called from anywhere inside the tree. This function is
+	// path independent.
+	public void LoadGame()
+	{
+		if (!FileAccess.FileExists("user://savegame.save"))
+		{
+			return; // Error! We don't have a save to load.
+		}
+
+		// We need to revert the game state so we're not cloning objects during loading.
+		// This will vary wildly depending on the needs of a project, so take care with
+		// this step.
+		// For our example, we will accomplish this by deleting saveable objects.
+		var saveNodes = GetTree().GetNodesInGroup("Persist");
+		foreach (Node saveNode in saveNodes)
+		{
+			saveNode.QueueFree();
+		}
+
+		// Load the file line by line and process that dictionary to restore the object
+		// it represents.
+		using var saveGame = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Read);
+
+		while (saveGame.GetPosition() < saveGame.GetLength())
+		{
+			var jsonString = saveGame.GetLine();
+
+			// Creates the helper class to interact with JSON
+			var json = new Json();
+			var parseResult = json.Parse(jsonString);
+			if (parseResult != Error.Ok)
+			{
+				GD.Print($"JSON Parse Error: {json.GetErrorMessage()} in {jsonString} at line {json.GetErrorLine()}");
+				continue;
+			}
+
+			// Get the data from the JSON object
+			var nodeData = new Godot.Collections.Dictionary<string, Variant>((Godot.Collections.Dictionary)json.Data);
+
+			// Firstly, we need to create the object and add it to the tree and set its position.
+			var newObjectScene = GD.Load<PackedScene>(nodeData["Filename"].ToString());
+			var newObject = newObjectScene.Instantiate<Node>();
+			GetNode(nodeData["Parent"].ToString()).AddChild(newObject);
+			newObject.Set(Node2D.PropertyName.Position, new Vector2((float)nodeData["PosX"], (float)nodeData["PosY"]));
+
+			// Now we set the remaining variables.
+			foreach (var (key, value) in nodeData)
+			{
+				if (key == "Filename" || key == "Parent" || key == "PosX" || key == "PosY")
+				{
+					continue;
+				}
+				newObject.Set(key, value);
+			}
+		}
+	}
+	*/
+
 	public void SwitchToNextScene()
 	{
-		string nextScenePath = "res://chess/Board.tscn";
-		sceneSwitcher.SwitchScene(nextScenePath);
+		Save();
+		sceneSwitcher.SwitchScene("res://chess/Board.tscn");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -168,41 +366,41 @@ public partial class Mel : CharacterBody2D
 		if (Input.IsActionPressed("change_scene"))
 			SwitchToNextScene();
 
-	/*	var sprite_frames = $AnimatedSprite2D.sprite_frames
-			Get the first texture of the wanted animation (in this case, walk, you can also get the size
-			in differents cases)
-			If your animation frames has different sizes, use $AnimatedSprite2D.frame instead of 0
-		var texture       = sprite_frames.get_frame_texture("walk", 0)
-			Get frame size:
-		var texture_size  = texture.get_size()
-			This is not the end, you will get the texture size, not the node real size, then you need to
-			multiply the texture size with the node scale
-		var as2d_size     = texture_size * $AnimatedSprite2D.get_scale()
-	*/
-	
-	/*
-		if (velocity.Length() > 0)
-		{
-			velocity = velocity.Normalized() * Speed;
-			animatedSprite2D.Play();
-		}
-
-		else
-		{
-			animatedSprite2D.Stop();
-		}
-		/*
-		
-		
-		//Position += velocity * (float)delta;
-
-		/*
-		Position = new Vector2(
-			x: Mathf.Clamp(Position.X, 27, ScreenSize.Y-27),
-			y: Mathf.Clamp(Position.Y, 33.75f, ScreenSize.Y-33.75f) 
-		);
+		/*	var sprite_frames = $AnimatedSprite2D.sprite_frames
+				Get the first texture of the wanted animation (in this case, walk, you can also get the size
+				in differents cases)
+				If your animation frames has different sizes, use $AnimatedSprite2D.frame instead of 0
+			var texture       = sprite_frames.get_frame_texture("walk", 0)
+				Get frame size:
+			var texture_size  = texture.get_size()
+				This is not the end, you will get the texture size, not the node real size, then you need to
+				multiply the texture size with the node scale
+			var as2d_size     = texture_size * $AnimatedSprite2D.get_scale()
 		*/
-		
+
+		/*
+			if (velocity.Length() > 0)
+			{
+				velocity = velocity.Normalized() * Speed;
+				animatedSprite2D.Play();
+			}
+
+			else
+			{
+				animatedSprite2D.Stop();
+			}
+			/*
+
+
+			//Position += velocity * (float)delta;
+
+			/*
+			Position = new Vector2(
+				x: Mathf.Clamp(Position.X, 27, ScreenSize.Y-27),
+				y: Mathf.Clamp(Position.Y, 33.75f, ScreenSize.Y-33.75f) 
+			);
+			*/
+
 		/*
 		if (velocity.X != 0)
 		{
@@ -227,7 +425,7 @@ public partial class Mel : CharacterBody2D
 		}
 		*/
 
-		
+
 		if (Mathf.Abs(velocity.X) > 0)
 		{
 			velocity = velocity.Normalized() * Speed;
@@ -241,7 +439,7 @@ public partial class Mel : CharacterBody2D
 
 		Position += velocity * (float)delta;
 
-		
+
 	}
 
 
