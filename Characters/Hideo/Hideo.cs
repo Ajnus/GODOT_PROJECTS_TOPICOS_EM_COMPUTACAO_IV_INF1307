@@ -45,6 +45,8 @@ public partial class Hideo : CharacterBody2D
 
 	public string save_path = "res://HideoStats.sav";
 
+	public bool isFlippedH;
+
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
@@ -63,6 +65,14 @@ public partial class Hideo : CharacterBody2D
 	{
 		//GD.Print("global_position: ", GlobalPosition);
 		player_data["global_position"] = GlobalPosition;
+
+		// Acessar o AnimatedSprite2D para obter a direção
+		AnimatedSprite2D sprite = GetNode<AnimatedSprite2D>("Sprite");
+		bool isFlippedH = sprite.FlipH;
+
+		// Armazenar a direção no dicionário de dados do jogador
+		player_data["direction"] = isFlippedH ? "left" : "right";
+
 		FileAccess file = FileAccess.Open(save_path, FileAccess.ModeFlags.Write);
 		file.StoreVar(player_data);
 		//GD.Print("global_position salva!");
@@ -82,6 +92,16 @@ public partial class Hideo : CharacterBody2D
 				GlobalPosition = (Vector2)player_data["global_position"];
 				//GD.Print("global_position loaded!");
 			}
+
+			if (player_data.ContainsKey("direction"))
+			{
+				string direction = (string)player_data["direction"];
+				AnimatedSprite2D sprite = GetNode<AnimatedSprite2D>("Sprite");
+
+				// Aplicar a direção ao AnimatedSprite2D
+				sprite.FlipH = direction == "left";
+			}
+
 		}
 		else
 		{
@@ -236,7 +256,7 @@ public partial class Hideo : CharacterBody2D
 			animatedSprite2D.Play("kick");
 
 		//if (Input.IsActionPressed("change_scene"))
-			//SwitchToNextScene();
+		//SwitchToNextScene();
 
 		/*	var sprite_frames = $AnimatedSprite2D.sprite_frames
 				Get the first texture of the wanted animation (in this case, walk, you can also get the size

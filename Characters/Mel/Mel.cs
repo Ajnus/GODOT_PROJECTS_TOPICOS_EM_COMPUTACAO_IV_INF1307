@@ -46,6 +46,8 @@ public partial class Mel : CharacterBody2D
 
 	public string save_path = "res://MelStats.sav";
 
+	public bool isFlippedH;
+
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
@@ -58,19 +60,27 @@ public partial class Mel : CharacterBody2D
 		//GetNode<AnimatedSprite2D>("Sprite").Connect("animation_finished", OnAnimationFinished());
 		// Improved sceneSwitcher assignment
 
-
 		Load();
 
 	}
 
 	public void Save()
 	{
-		//EmitSignal(SignalName.Saved /*,player_data*/);
 		//GD.Print("global_position: ", GlobalPosition);
 		player_data["global_position"] = GlobalPosition;
+
+		// Acessar o AnimatedSprite2D para obter a direção
+		AnimatedSprite2D sprite = GetNode<AnimatedSprite2D>("Sprite");
+		bool isFlippedH = sprite.FlipH;
+
+		// Armazenar a direção no dicionário de dados do jogador
+		player_data["direction"] = isFlippedH ? "left" : "right";
+
+
 		FileAccess file = FileAccess.Open(save_path, FileAccess.ModeFlags.Write);
 		file.StoreVar(player_data);
 		//GD.Print("global_position salva!");
+
 		file.Close();
 	}
 
@@ -87,6 +97,16 @@ public partial class Mel : CharacterBody2D
 				GlobalPosition = (Vector2)player_data["global_position"];
 				//GD.Print("global_position loaded!");
 			}
+
+			if (player_data.ContainsKey("direction"))
+			{
+				string direction = (string)player_data["direction"];
+				AnimatedSprite2D sprite = GetNode<AnimatedSprite2D>("Sprite");
+
+				// Aplicar a direção ao AnimatedSprite2D
+				sprite.FlipH = direction == "left";
+			}
+
 		}
 		else
 		{

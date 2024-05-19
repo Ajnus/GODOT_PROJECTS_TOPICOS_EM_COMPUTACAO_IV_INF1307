@@ -18,8 +18,7 @@ var Areas: PackedStringArray
 var Special_Area: PackedStringArray
 
 func switch_to_next_scene() -> void:
-	var next_scene_path: String = "res://Stages/TestStage.tscn"
-	get_tree().change_scene_to_file(next_scene_path);
+	get_tree().change_scene_to_file("res://Stages/TestStage.tscn");
 	
 func _process(float)->void:
 	if Input.is_action_pressed("change_scene"):
