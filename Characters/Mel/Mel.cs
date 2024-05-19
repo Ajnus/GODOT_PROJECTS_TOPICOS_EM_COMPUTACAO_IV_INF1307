@@ -56,6 +56,26 @@ public partial class Mel : CharacterBody2D
 		GetNode<AnimatedSprite2D>("Sprite").Play("idle");
 		sceneSwitcher = GetNode<FightSceneSwitcher>("FightSceneSwitcher");
 		//GetNode<AnimatedSprite2D>("Sprite").Connect("animation_finished", OnAnimationFinished());
+		TestStage parent = GetParent<TestStage>();
+
+		// Verificar se o nó pai foi encontrado e acessar a variável sceneSwitcher
+		if (parent != null)
+		{
+			SceneSwitcher sceneSwitcher = parent.sceneSwitcher;
+			if (sceneSwitcher != null)
+			{
+				GD.Print("sceneSwitcher accessed successfully");
+				// Agora você pode usar a variável sceneSwitcher conforme necessário
+			}
+			else
+			{
+				GD.Print("sceneSwitcher is null");
+			}
+		}
+		else
+		{
+			GD.Print("Parent node not found");
+		}
 
 		Load();
 
@@ -63,6 +83,7 @@ public partial class Mel : CharacterBody2D
 
 	public void Save()
 	{
+		//EmitSignal(SignalName.Saved /*,player_data*/);
 		//GD.Print("global_position: ", GlobalPosition);
 		player_data["global_position"] = GlobalPosition;
 		FileAccess file = FileAccess.Open(save_path, FileAccess.ModeFlags.Write);
@@ -79,7 +100,7 @@ public partial class Mel : CharacterBody2D
 			player_data = (Dictionary)file.GetVar();
 
 			if (player_data.ContainsKey("global_position"))
-			{	
+			{
 				//GD.Print("global_position: ", GlobalPosition);
 				GlobalPosition = (Vector2)player_data["global_position"];
 				//GD.Print("global_position loaded!");
@@ -89,7 +110,7 @@ public partial class Mel : CharacterBody2D
 		{
 			player_data = new Dictionary();
 		}
-		GD.Print(player_data);
+		GD.Print("Mel: ", player_data);
 	}
 
 	/*
@@ -113,7 +134,7 @@ public partial class Mel : CharacterBody2D
 		};
 	}
 	*/
-	
+
 	/*
 	 public void SaveSceneState()
 	{

@@ -1,24 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccmw7cc5t3vdx"]
+[gd_scene load_steps=7 format=3 uid="uid://ccmw7cc5t3vdx"]
 
-[ext_resource type="Texture2D" uid="uid://70rxfrhr0dhm" path="res://Stages/Smashville/1.png" id="1_jfbxi"]
-[ext_resource type="PackedScene" uid="uid://cll6kf1mvnmvs" path="res://Characters/Mel/Mel.tscn" id="2_mtb1n"]
-[ext_resource type="PackedScene" uid="uid://dk3ev8ug4qnap" path="res://Characters/Hideo/Hideo.tscn" id="3_28u7k"]
+[ext_resource type="Script" path="res://Stages/TestStage.cs" id="1_majp2"]
+[ext_resource type="Texture2D" uid="uid://70rxfrhr0dhm" path="res://Stages/Smashville/1.png" id="2_2hkou"]
+[ext_resource type="PackedScene" uid="uid://cll6kf1mvnmvs" path="res://Characters/Mel/Mel.tscn" id="3_u05yb"]
+[ext_resource type="PackedScene" uid="uid://dk3ev8ug4qnap" path="res://Characters/Hideo/Hideo.tscn" id="4_ary1m"]
+[ext_resource type="Script" path="res://Stages/SceneSwitcher.cs" id="5_kchhi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hknmw"]
 size = Vector2(965, 38)
 
 [node name="Test Stage" type="Node2D"]
 position = Vector2(72, -48)
+script = ExtResource("1_majp2")
 
 [node name="1" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(912, 573)
 scale = Vector2(2, 2)
-texture = ExtResource("1_jfbxi")
+texture = ExtResource("2_2hkou")
 
 [node name="2" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("1_jfbxi")
+texture = ExtResource("2_2hkou")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -61,8 +64,11 @@ drag_right_margin = 0.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="MEL" parent="." instance=ExtResource("2_mtb1n")]
+[node name="MEL" parent="." instance=ExtResource("3_u05yb")]
 position = Vector2(-262, 209)
 
-[node name="Hideo" parent="." instance=ExtResource("3_28u7k")]
+[node name="Hideo" parent="." instance=ExtResource("4_ary1m")]
 position = Vector2(236, 215)
+
+[node name="SceneSwitcher" type="Node" parent="."]
+script = ExtResource("5_kchhi")

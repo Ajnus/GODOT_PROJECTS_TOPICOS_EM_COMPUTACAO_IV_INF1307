@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class Hideo : CharacterBody2D
@@ -40,6 +41,10 @@ public partial class Hideo : CharacterBody2D
 
 	public FightSceneSwitcher sceneSwitcher;
 
+	public Dictionary player_data = new Dictionary();
+
+	public string save_path = "res://HideoStats.sav";
+
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
@@ -50,6 +55,39 @@ public partial class Hideo : CharacterBody2D
 		GetNode<AnimatedSprite2D>("Sprite").Play("idle");
 		sceneSwitcher = GetNode<FightSceneSwitcher>("FightSceneSwitcher");
 		//GetNode<AnimatedSprite2D>("Sprite").Connect("animation_finished", OnAnimationFinished());
+
+		Load();
+	}
+
+	public void Save()
+	{
+		//GD.Print("global_position: ", GlobalPosition);
+		player_data["global_position"] = GlobalPosition;
+		FileAccess file = FileAccess.Open(save_path, FileAccess.ModeFlags.Write);
+		file.StoreVar(player_data);
+		//GD.Print("global_position salva!");
+		file.Close();
+	}
+
+	public void Load()
+	{
+		if (FileAccess.FileExists(save_path))
+		{
+			using var file = FileAccess.Open(save_path, FileAccess.ModeFlags.Read);
+			player_data = (Dictionary)file.GetVar();
+
+			if (player_data.ContainsKey("global_position"))
+			{
+				//GD.Print("global_position: ", GlobalPosition);
+				GlobalPosition = (Vector2)player_data["global_position"];
+				//GD.Print("global_position loaded!");
+			}
+		}
+		else
+		{
+			player_data = new Dictionary();
+		}
+		GD.Print("Hideo:", player_data);
 	}
 
 	public void OnAnimationFinished()
@@ -68,8 +106,8 @@ public partial class Hideo : CharacterBody2D
 
 	public void SwitchToNextScene()
 	{
-		string nextScenePath = "res://chess/Board.tscn";
-		sceneSwitcher.SwitchScene(nextScenePath);
+		Save();
+		sceneSwitcher.SwitchScene("res://chess/Board.tscn");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -159,7 +197,7 @@ public partial class Hideo : CharacterBody2D
 		//if (Input.IsActionPressed("move_up"))
 		//	velocity.Y -= 1;
 
-	
+
 		if (Input.IsActionPressed("up_2") && !animatedSprite2D.Animation.Equals("uppercut"))
 			animatedSprite2D.Play("uppercut");
 
@@ -169,41 +207,41 @@ public partial class Hideo : CharacterBody2D
 		//if (Input.IsActionPressed("change_scene"))
 		//	SwitchToNextScene();
 
-	/*	var sprite_frames = $AnimatedSprite2D.sprite_frames
-			Get the first texture of the wanted animation (in this case, walk, you can also get the size
-			in differents cases)
-			If your animation frames has different sizes, use $AnimatedSprite2D.frame instead of 0
-		var texture       = sprite_frames.get_frame_texture("walk", 0)
-			Get frame size:
-		var texture_size  = texture.get_size()
-			This is not the end, you will get the texture size, not the node real size, then you need to
-			multiply the texture size with the node scale
-		var as2d_size     = texture_size * $AnimatedSprite2D.get_scale()
-	*/
-	
-	/*
-		if (velocity.Length() > 0)
-		{
-			velocity = velocity.Normalized() * Speed;
-			animatedSprite2D.Play();
-		}
-
-		else
-		{
-			animatedSprite2D.Stop();
-		}
-		/*
-		
-		
-		//Position += velocity * (float)delta;
-
-		/*
-		Position = new Vector2(
-			x: Mathf.Clamp(Position.X, 27, ScreenSize.Y-27),
-			y: Mathf.Clamp(Position.Y, 33.75f, ScreenSize.Y-33.75f) 
-		);
+		/*	var sprite_frames = $AnimatedSprite2D.sprite_frames
+				Get the first texture of the wanted animation (in this case, walk, you can also get the size
+				in differents cases)
+				If your animation frames has different sizes, use $AnimatedSprite2D.frame instead of 0
+			var texture       = sprite_frames.get_frame_texture("walk", 0)
+				Get frame size:
+			var texture_size  = texture.get_size()
+				This is not the end, you will get the texture size, not the node real size, then you need to
+				multiply the texture size with the node scale
+			var as2d_size     = texture_size * $AnimatedSprite2D.get_scale()
 		*/
-		
+
+		/*
+			if (velocity.Length() > 0)
+			{
+				velocity = velocity.Normalized() * Speed;
+				animatedSprite2D.Play();
+			}
+
+			else
+			{
+				animatedSprite2D.Stop();
+			}
+			/*
+
+
+			//Position += velocity * (float)delta;
+
+			/*
+			Position = new Vector2(
+				x: Mathf.Clamp(Position.X, 27, ScreenSize.Y-27),
+				y: Mathf.Clamp(Position.Y, 33.75f, ScreenSize.Y-33.75f) 
+			);
+			*/
+
 		/*
 		if (velocity.X != 0)
 		{
@@ -228,7 +266,7 @@ public partial class Hideo : CharacterBody2D
 		}
 		*/
 
-		
+
 		if (Mathf.Abs(velocity.X) > 0)
 		{
 			velocity = velocity.Normalized() * Speed;
@@ -242,7 +280,7 @@ public partial class Hideo : CharacterBody2D
 
 		Position += velocity * (float)delta;
 
-		
+
 	}
 
 
