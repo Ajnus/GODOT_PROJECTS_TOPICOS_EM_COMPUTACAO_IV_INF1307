@@ -13,6 +13,9 @@ public partial class TestStage : Node2D
 		sceneSwitcher = GetNode<FightSceneSwitcher>("FightSceneSwitcher");
 		mel = GetNode<Mel>("MEL");
 		hideo = GetNode<Hideo>("HIDEO");
+
+		//mel.GlobalPosition = new Vector2(-262, 209);
+		//hideo.GlobalPosition = new Vector2(236, 215);
 		
 		// Verifique se o nó foi encontrado
 		if (sceneSwitcher == null)

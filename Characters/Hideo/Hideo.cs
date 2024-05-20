@@ -58,7 +58,23 @@ public partial class Hideo : CharacterBody2D
 		//sceneSwitcher = GetNode<FightSceneSwitcher>("FightSceneSwitcher");
 		//GetNode<AnimatedSprite2D>("Sprite").Connect("animation_finished", OnAnimationFinished());
 
-		Load();
+		//Global GlobalScene = GetTree().Root.GetChild(0);
+		//GD.Print("Nome da cena: " + GlobalScene.Name);
+		//var targetNode = testStageScene.GetNode<Node2D>("MEL");	
+		Global global = (Global)GetNode("/root/Global");
+
+		//isInitialized = GlobalScene.isInitialized;
+		
+		GD.Print("global.isInitializedHideo: ", global.isInitializedHideo);
+		if (global.isInitializedHideo)
+		{
+			Load();
+		}
+		else
+		{
+			global.ExecuteOnceHideo();
+		}
+		//isBoot = false;
 	}
 
 	public void Save()

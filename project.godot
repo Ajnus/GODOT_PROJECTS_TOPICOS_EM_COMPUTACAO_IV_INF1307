@@ -15,6 +15,10 @@ run/main_scene="res://Stages/TestStage.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://Global.cs"
+
 [display]
 
 window/size/viewport_width=1920

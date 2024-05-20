@@ -48,6 +48,8 @@ public partial class Mel : CharacterBody2D
 
 	public bool isFlippedH;
 
+	public bool isInitialized;
+
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
@@ -60,13 +62,29 @@ public partial class Mel : CharacterBody2D
 		//GetNode<AnimatedSprite2D>("Sprite").Connect("animation_finished", OnAnimationFinished());
 		// Improved sceneSwitcher assignment
 
-		Load();
 
+		//Global GlobalScene = GetTree().Root.GetChild(0);
+		//GD.Print("Nome da cena: " + GlobalScene.Name);
+		//var targetNode = testStageScene.GetNode<Node2D>("MEL");	
+		Global global = (Global)GetNode("/root/Global");
+
+		//isInitialized = GlobalScene.isInitialized;
+		
+		GD.Print("global.isInitializedMel: ", global.isInitializedMel);
+		if (global.isInitializedMel)
+		{
+			Load();
+		}
+		else
+		{
+			global.ExecuteOnceMel();
+		}
+		//isBoot = false;
 	}
 
 	public void Save()
 	{
-		//GD.Print("global_position: ", GlobalPosition);
+		GD.Print("global_position: ", GlobalPosition);
 		player_data["global_position"] = GlobalPosition;
 
 		// Acessar o AnimatedSprite2D para obter a direção
@@ -79,7 +97,7 @@ public partial class Mel : CharacterBody2D
 
 		FileAccess file = FileAccess.Open(save_path, FileAccess.ModeFlags.Write);
 		file.StoreVar(player_data);
-		//GD.Print("global_position salva!");
+		GD.Print("global_position salva!");
 
 		file.Close();
 	}
@@ -90,13 +108,12 @@ public partial class Mel : CharacterBody2D
 		{
 			using var file = FileAccess.Open(save_path, FileAccess.ModeFlags.Read);
 			player_data = (Dictionary)file.GetVar();
-			file.Close();
 
 			if (player_data.ContainsKey("global_position"))
 			{
-				//GD.Print("global_position: ", GlobalPosition);
+				GD.Print("LOAD global_position: ", GlobalPosition);
 				GlobalPosition = (Vector2)player_data["global_position"];
-				//GD.Print("global_position loaded!");
+				GD.Print("global_position loaded!");
 			}
 
 			if (player_data.ContainsKey("direction"))
@@ -107,7 +124,7 @@ public partial class Mel : CharacterBody2D
 				// Aplicar a direção ao AnimatedSprite2D
 				sprite.FlipH = direction == "left";
 			}
-
+			file.Close();
 		}
 		else
 		{
@@ -115,6 +132,7 @@ public partial class Mel : CharacterBody2D
 		}
 		//GD.Print("Mel: ", player_data);
 	}
+
 
 	/*
 	public override void _Notification(int what)

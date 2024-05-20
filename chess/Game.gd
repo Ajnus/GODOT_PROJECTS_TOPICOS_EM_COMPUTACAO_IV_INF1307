@@ -399,7 +399,7 @@ func load_board_state():
 		board_data = {}
 		print("No save file found")
 
-	print("Board: ", board_data);
+	#print("Board: ", board_data);
 
 
 
