@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dup1vrnkfmfrv"
-path="res://.godot/imported/Chess.png-8f858e01c1640648fe58847da7a3ede5.ctex"
+uid="uid://dwicejwri8b0p"
+path="res://.godot/imported/0.png-5bcc2242adb09cc4ebbbfa76b4f1bb29.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Chess/Chess.png"
-dest_files=["res://.godot/imported/Chess.png-8f858e01c1640648fe58847da7a3ede5.ctex"]
+source_file="res://Stages/Smashville/0.png"
+dest_files=["res://.godot/imported/0.png-5bcc2242adb09cc4ebbbfa76b4f1bb29.ctex"]
 
 [params]
 

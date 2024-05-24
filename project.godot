@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Fighting Game"
-run/main_scene="res://Stages/TestStage.tscn"
+run/main_scene="res://Global.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Global.cs"
+Global="res://Global.cs"
 
 [display]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dup1vrnkfmfrv"
-path="res://.godot/imported/Chess.png-8f858e01c1640648fe58847da7a3ede5.ctex"
+uid="uid://b8e8353pyae4l"
+path="res://.godot/imported/BKing.svg-5d3e77b8aa9658a9a39cb02eceb57f49.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Chess/Chess.png"
-dest_files=["res://.godot/imported/Chess.png-8f858e01c1640648fe58847da7a3ede5.ctex"]
+source_file="res://Chess/addons/Chess/Textures/BKing.svg"
+dest_files=["res://.godot/imported/BKing.svg-5d3e77b8aa9658a9a39cb02eceb57f49.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

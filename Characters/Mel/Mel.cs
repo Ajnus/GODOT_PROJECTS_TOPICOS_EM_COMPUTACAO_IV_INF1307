@@ -70,7 +70,7 @@ public partial class Mel : CharacterBody2D
 
 		//isInitialized = GlobalScene.isInitialized;
 		
-		GD.Print("global.isInitializedMel: ", global.isInitializedMel);
+		//GD.Print("global.isInitializedMel: ", global.isInitializedMel);
 		if (global.isInitializedMel)
 		{
 			Load();
@@ -84,7 +84,7 @@ public partial class Mel : CharacterBody2D
 
 	public void Save()
 	{
-		GD.Print("global_position: ", GlobalPosition);
+		//GD.Print("global_position: ", GlobalPosition);
 		player_data["global_position"] = GlobalPosition;
 
 		// Acessar o AnimatedSprite2D para obter a direção
@@ -97,7 +97,7 @@ public partial class Mel : CharacterBody2D
 
 		FileAccess file = FileAccess.Open(save_path, FileAccess.ModeFlags.Write);
 		file.StoreVar(player_data);
-		GD.Print("global_position salva!");
+		//GD.Print("global_position salva!");
 
 		file.Close();
 	}
@@ -111,9 +111,9 @@ public partial class Mel : CharacterBody2D
 
 			if (player_data.ContainsKey("global_position"))
 			{
-				GD.Print("LOAD global_position: ", GlobalPosition);
+				//GD.Print("LOAD global_position: ", GlobalPosition);
 				GlobalPosition = (Vector2)player_data["global_position"];
-				GD.Print("global_position loaded!");
+				//GD.Print("global_position loaded!");
 			}
 
 			if (player_data.ContainsKey("direction"))
@@ -335,7 +335,7 @@ public partial class Mel : CharacterBody2D
 
 		if (sceneSwitcher != null)
 		{
-			sceneSwitcher.SwitchScene("res://chess/Board.tscn");
+			sceneSwitcher.SwitchScene("res://Chess/Board.tscn");
 		}
 		else
 		{

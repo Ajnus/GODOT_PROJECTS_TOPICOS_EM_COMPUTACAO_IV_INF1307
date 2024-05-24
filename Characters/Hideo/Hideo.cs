@@ -65,7 +65,7 @@ public partial class Hideo : CharacterBody2D
 
 		//isInitialized = GlobalScene.isInitialized;
 		
-		GD.Print("global.isInitializedHideo: ", global.isInitializedHideo);
+		//GD.Print("global.isInitializedHideo: ", global.isInitializedHideo);
 		if (global.isInitializedHideo)
 		{
 			Load();
@@ -170,7 +170,7 @@ public partial class Hideo : CharacterBody2D
 
 		if (sceneSwitcher != null)
 		{
-			sceneSwitcher.SwitchScene("res://chess/Board.tscn");
+			sceneSwitcher.SwitchScene("res://Chess/Board.tscn");
 		}
 		else
 		{

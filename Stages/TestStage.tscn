@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccmw7cc5t3vdx"]
+[gd_scene load_steps=8 format=3 uid="uid://ccmw7cc5t3vdx"]
 
 [ext_resource type="Script" path="res://Stages/TestStage.cs" id="1_majp2"]
 [ext_resource type="Texture2D" uid="uid://70rxfrhr0dhm" path="res://Stages/Smashville/1.png" id="2_2hkou"]
+[ext_resource type="Texture2D" uid="uid://dwicejwri8b0p" path="res://Stages/Smashville/0.png" id="2_feoyo"]
 [ext_resource type="PackedScene" uid="uid://cll6kf1mvnmvs" path="res://Characters/Mel/Mel.tscn" id="3_u05yb"]
 [ext_resource type="PackedScene" uid="uid://dk3ev8ug4qnap" path="res://Characters/Hideo/Hideo.tscn" id="4_ary1m"]
 [ext_resource type="Script" path="res://FightSceneSwitcher.cs" id="5_rid8w"]
@@ -13,6 +14,12 @@ size = Vector2(965, 38)
 position = Vector2(72, -48)
 script = ExtResource("1_majp2")
 
+[node name="0" type="Sprite2D" parent="."]
+position = Vector2(-1144, -552)
+scale = Vector2(3.99477, 3.01463)
+texture = ExtResource("2_feoyo")
+centered = false
+
 [node name="1" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(912, 573)
@@ -20,6 +27,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_2hkou")
 
 [node name="2" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(2, 2)
 texture = ExtResource("2_2hkou")
 

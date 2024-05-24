@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dup1vrnkfmfrv"
-path="res://.godot/imported/Chess.png-8f858e01c1640648fe58847da7a3ede5.ctex"
+uid="uid://lo03lg25oned"
+path="res://.godot/imported/chessboxing.jpg-7e87bd1e5d5ee2945f3336f4013495f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Chess/Chess.png"
-dest_files=["res://.godot/imported/Chess.png-8f858e01c1640648fe58847da7a3ede5.ctex"]
+source_file="res://Art/chessboxing.jpg"
+dest_files=["res://.godot/imported/chessboxing.jpg-7e87bd1e5d5ee2945f3336f4013495f4.ctex"]
 
 [params]
 

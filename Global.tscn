@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpa75i6luxwm8"]
+
+[ext_resource type="Script" path="res://Global.cs" id="1_cpi0f"]
+[ext_resource type="PackedScene" uid="uid://ccmw7cc5t3vdx" path="res://Stages/TestStage.tscn" id="2_htju7"]
+[ext_resource type="PackedScene" uid="uid://cg6wmcm7mady7" path="res://Chess/Board.tscn" id="3_w18r2"]
+
+[node name="Global" type="Node"]
+script = ExtResource("1_cpi0f")
+
+[node name="TestStage" parent="." instance=ExtResource("2_htju7")]
+
+[node name="Board" parent="." instance=ExtResource("3_w18r2")]
+visible = false

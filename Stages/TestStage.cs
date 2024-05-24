@@ -52,7 +52,7 @@ public partial class TestStage : Node2D
 		if (Input.IsActionJustPressed("change_scene"))
 			{
 				//GD.Print("TESTSTAGE: Change scene action pressed");
-				SwitchToNextScene("res://chess/Board.tscn");
+				SwitchToNextScene("res://Chess/Board.tscn");
 			}
 	}
 }

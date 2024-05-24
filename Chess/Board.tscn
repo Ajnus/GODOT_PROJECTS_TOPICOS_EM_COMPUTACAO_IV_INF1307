@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg6wmcm7mady7"]
+
+[ext_resource type="Script" path="res://Chess/Game.gd" id="1_kkmol"]
+[ext_resource type="Script" path="res://Chess/Generator.gd" id="2_urvtw"]
+[ext_resource type="Script" path="res://Chess/BoardSceneSwitcher.cs" id="3_85nwb"]
+[ext_resource type="Texture2D" uid="uid://lo03lg25oned" path="res://Art/chessboxing.jpg" id="4_ysrgu"]
+
+[node name="Board" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_kkmol")
+
+[node name="Chessboxing" type="Sprite2D" parent="."]
+scale = Vector2(0.96, 0.810203)
+texture = ExtResource("4_ysrgu")
+centered = false
+
+[node name="Flow" type="FlowContainer" parent="."]
+layout_mode = 0
+script = ExtResource("2_urvtw")
+
+[node name="BoardSceneSwitcher" type="Node" parent="."]
+script = ExtResource("3_85nwb")
+
+[connection signal="send_location" from="Flow" to="." method="_on_flow_send_location"]
